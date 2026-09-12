@@ -21,6 +21,7 @@
       <div class="nav-links">
         <a href="#numbers">Numbers</a>
         <a href="#watch">Watch</a>
+        <a href="#damage">Damage</a>
         <a href="#plate">Your plate</a>
         <a href="#help">Help</a>
         <a href="#ideas">Ideas</a>
@@ -42,7 +43,7 @@
 
     <section class="chapter" id="numbers">
       <p class="eyebrow reveal">This year, so far</p>
-      <p class="giant reveal" id="livestock-num">0</p>
+      <p class="giant num-bad reveal" id="livestock-num">0</p>
       <h2 class="reveal">tonnes of greenhouse gas from livestock.</h2>
       <p class="lede reveal">
         That is about 14.5% of everything humans emit — more than every car
@@ -61,11 +62,11 @@
     <section class="chapter split">
       <div>
         <p class="eyebrow reveal">Land animals</p>
-        <p class="giant sm reveal" id="animals-num">0</p>
+        <p class="giant sm num-bad reveal" id="animals-num">0</p>
       </div>
       <div>
         <p class="eyebrow reveal">Cattle</p>
-        <p class="giant sm reveal" id="cattle-num">0</p>
+        <p class="giant sm num-bad reveal" id="cattle-num">0</p>
       </div>
     </section>
 
@@ -78,7 +79,7 @@
 
     <section class="chapter">
       <p class="eyebrow reveal">Forest</p>
-      <p class="giant sm reveal" id="forest-num">0</p>
+      <p class="giant sm num-bad reveal" id="forest-num">0</p>
       <h2 class="reveal">hectares of tropical primary forest, at this year’s pace.</h2>
     </section>
 
@@ -86,6 +87,37 @@
       <img id="img-forest" alt="Dense forest canopy" />
       <figcaption>A plant-based year uses a fraction of the land. The rest can be forest again.</figcaption>
     </figure>
+
+    <section class="chapter damage" id="damage">
+      <p class="eyebrow reveal">The damage</p>
+      <h2 class="reveal">What animal farming takes.<br />What a plant plate gives back.</h2>
+      <p class="lede reveal">
+        Pick a wound. Then drag how many people walk away from meat and dairy.
+        Red is what is still happening. Green is what we stop.
+      </p>
+      <div class="impact-picks reveal" id="impact-picks"></div>
+      <div class="impact-stage reveal">
+        <div>
+          <span>Still happening</span>
+          <b class="num-bad" id="impact-harm">0</b>
+          <small id="impact-harm-unit"></small>
+        </div>
+        <div>
+          <span>Prevented</span>
+          <b class="num-good" id="impact-saved">0</b>
+          <small id="impact-saved-unit"></small>
+        </div>
+      </div>
+      <div class="impact-bar reveal" aria-hidden="true">
+        <i id="impact-bar-bad"></i>
+        <i id="impact-bar-good"></i>
+      </div>
+      <label class="impact-slider reveal">
+        <span>People shifting to a plant plate: <b id="impact-pct">20%</b></span>
+        <input id="impact-range" type="range" min="0" max="100" value="20" />
+      </label>
+      <p class="lede reveal" id="impact-copy"></p>
+    </section>
 
     <section class="chapter" id="watch">
       <p class="eyebrow reveal">Watch</p>
@@ -104,15 +136,15 @@
       <div class="futures reveal">
         <div>
           <span>Now</span>
-          <b id="you-now">0 t</b>
+          <b class="num-bad" id="you-now">0 t</b>
         </div>
         <div>
           <span>Vegetarian</span>
-          <b id="you-veg">0 t</b>
+          <b class="num-bad" id="you-veg">0 t</b>
         </div>
         <div>
           <span>Vegan</span>
-          <b id="you-vegan">0 t</b>
+          <b class="num-good" id="you-vegan">0 t</b>
         </div>
       </div>
       <p class="lede reveal" id="you-save-note"></p>

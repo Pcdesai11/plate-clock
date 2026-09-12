@@ -14,6 +14,76 @@ export const COMPARATORS = {
   tonnesPerNycLondonFlight: 0.9,
 };
 
+/** Annual harm from animal farming. `avoidable` = share a plant-based shift can prevent. */
+export const IMPACTS = [
+  {
+    id: "climate",
+    label: "Climate",
+    unit: "tonnes CO₂e this year",
+    yearly: 7.1e9,
+    ticking: true,
+    avoidable: 0.7,
+    harm: "Livestock methane, manure, and feed. About 14.5% of all human greenhouse gases.",
+    hope: "Most of this disappears if animals leave the plate. Beans do not belch methane.",
+    source: "FAO GLEAM",
+  },
+  {
+    id: "animals",
+    label: "Animals",
+    unit: "land animals killed this year",
+    yearly: 83e9,
+    ticking: true,
+    avoidable: 1,
+    harm: "Chickens, pigs, cattle, sheep, goats. Almost all of them exist only to be eaten.",
+    hope: "A plant plate ends this number. That is the whole point of the count.",
+    source: "FAOSTAT / Our World in Data",
+  },
+  {
+    id: "land",
+    label: "Land",
+    unit: "hectares held for livestock",
+    yearly: 2.7e9,
+    ticking: false,
+    avoidable: 0.76,
+    harm: "About 77% of farming land feeds animals, not people. Pasture plus feed crops.",
+    hope: "Poore & Nemecek: dropping animal products can free about three-quarters of farm land.",
+    source: "Our World in Data / Poore & Nemecek 2018",
+  },
+  {
+    id: "forest",
+    label: "Forest",
+    unit: "hectares of tropical primary forest, this year’s pace",
+    yearly: 3.7e6,
+    ticking: true,
+    avoidable: 0.8,
+    harm: "Cattle pasture is the leading reason Amazon forest becomes grass.",
+    hope: "Leave the beef, and most of this frontier pressure falls.",
+    source: "WRI / Global Forest Watch",
+  },
+  {
+    id: "water",
+    label: "Water",
+    unit: "liters for beef alone this year",
+    yearly: 1.08e15,
+    ticking: true,
+    avoidable: 0.9,
+    harm: "About 15,400 liters per kilogram of beef. A year of global beef is a vanished river.",
+    hope: "Lentils and tofu use a sliver of that water for the same protein.",
+    source: "Mekonnen & Hoekstra / Water Footprint Network",
+  },
+  {
+    id: "rivers",
+    label: "Rivers",
+    unit: "% of water pollution from food (eutrophication)",
+    yearly: 78,
+    ticking: false,
+    avoidable: 0.49,
+    harm: "Manure and fertilizer runoff choke rivers and grow ocean dead zones.",
+    hope: "Cutting animal products cuts a large share of that nutrient load.",
+    source: "Poore & Nemecek, Science, 2018",
+  },
+];
+
 export const FOODS = {
   beef: {
     label: "Beef",
@@ -236,6 +306,16 @@ export const SOURCES = [
     claim: "Red globe dots: Climate TRACE cattle sources + FAO-weighted cattle and pig farm belts",
     source: "Climate TRACE agriculture inventory / FAOSTAT livestock stocks",
     href: "https://climatetrace.org/data",
+  },
+  {
+    claim: "Avoiding animal products can cut food GHG ~49% and farmland ~76%",
+    source: "Poore & Nemecek, Science, 2018",
+    href: "https://www.science.org/doi/10.1126/science.aaq0216",
+  },
+  {
+    claim: "Beef water footprint ~15,415 liters / kg",
+    source: "Mekonnen & Hoekstra, Water Footprint Network",
+    href: "https://www.waterfootprint.org/resources/interactive-tools/product-gallery/",
   },
 ];
 

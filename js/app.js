@@ -5,6 +5,7 @@ import {
   SOURCES,
   NGOS,
   MEDIA,
+  IMPACTS,
   yearProgress,
   dietFootprint,
   formatInt,
@@ -17,6 +18,8 @@ const state = {
   perWeek: Object.fromEntries(
     Object.entries(FOODS).map(([id, f]) => [id, f.defaultPerWeek])
   ),
+  impactId: "climate",
+  impactPct: 20,
 };
 
 function worldNow(now = Date.now()) {
@@ -115,8 +118,61 @@ function renderPersonal() {
   $("you-now").textContent = `${now.tonnes.toFixed(1)} t`;
   $("you-veg").textContent = `${veg.tonnes.toFixed(1)} t`;
   $("you-vegan").textContent = `${vegan.tonnes.toFixed(1)} t`;
-  $("you-save-note").textContent =
-    `Going vegan from this plate saves ${saved.toFixed(1)} tonnes a year — about ${formatInt(drivingKm(saved))} km of driving.`;
+  $("you-save-note").innerHTML =
+    `Going vegan from this plate saves <span class="num-good">${saved.toFixed(1)} tonnes</span> a year — about <span class="num-good">${formatInt(drivingKm(saved))} km</span> of driving.`;
+}
+
+function currentImpact() {
+  return IMPACTS.find((item) => item.id === state.impactId) || IMPACTS[0];
+}
+
+function impactValue(item, now = Date.now()) {
+  if (!item.ticking) return item.yearly;
+  return item.yearly * yearProgress(now);
+}
+
+function formatImpact(item, value) {
+  if (item.id === "rivers") return `${value.toFixed(1)}%`;
+  return formatInt(value);
+}
+
+function renderImpacts(now = Date.now()) {
+  const item = currentImpact();
+  const total = impactValue(item, now);
+  const prevented = total * (state.impactPct / 100) * item.avoidable;
+  const remaining = Math.max(0, total - prevented);
+  $("impact-harm").textContent = formatImpact(item, remaining);
+  $("impact-saved").textContent = formatImpact(item, prevented);
+  $("impact-harm-unit").textContent = item.unit;
+  $("impact-saved-unit").textContent = item.unit;
+  const share = total === 0 ? 0 : (remaining / total) * 100;
+  $("impact-bar-bad").style.width = `${share}%`;
+  $("impact-bar-good").style.width = `${100 - share}%`;
+  $("impact-copy").innerHTML =
+    `<span class="num-bad">${item.harm}</span> <span class="num-good">${item.hope}</span>`;
+}
+
+function wireImpacts() {
+  const picks = $("impact-picks");
+  picks.innerHTML = IMPACTS.map(
+    (item) =>
+      `<button type="button" data-impact="${item.id}" aria-pressed="${item.id === state.impactId}">${item.label}</button>`
+  ).join("");
+  picks.addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-impact]");
+    if (!btn) return;
+    state.impactId = btn.dataset.impact;
+    for (const b of picks.querySelectorAll("button")) {
+      b.setAttribute("aria-pressed", String(b === btn));
+    }
+    renderImpacts();
+  });
+  const range = $("impact-range");
+  range.addEventListener("input", () => {
+    state.impactPct = Number(range.value);
+    $("impact-pct").textContent = `${state.impactPct}%`;
+    renderImpacts();
+  });
 }
 
 const IDEA_KEY = "plate-clock-ideas";
@@ -248,7 +304,9 @@ function reveal() {
 }
 
 function loop() {
-  renderWorld(Date.now());
+  const now = Date.now();
+  renderWorld(now);
+  renderImpacts(now);
   requestAnimationFrame(loop);
 }
 
@@ -257,6 +315,8 @@ async function main() {
   guardImages();
   renderSliders();
   renderPersonal();
+  wireImpacts();
+  renderImpacts();
   wireShare();
   renderIdeas();
   wireForm();
