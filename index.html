@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Plate Clock</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="loader">
+      <p id="loader-text">Finding the dayside</p>
+    </div>
+    <canvas id="globe"></canvas>
+    <div id="vignette"></div>
+
+    <div id="app">
+      <header class="top">
+        <div class="brand">
+          <div class="live"><i></i> Live · real sunlight · published yearly rates</div>
+          <h1>The Plate Clock</h1>
+          <p class="sub">
+            The food system does not wait for a calculator. These totals are
+            this calendar year, ticking from FAO, Oxford, and Our World in Data.
+          </p>
+        </div>
+        <div class="top-actions">
+          <button class="ghost" id="open-sources" type="button">Sources</button>
+          <button class="ghost" id="open-share" type="button">Share my number</button>
+        </div>
+      </header>
+
+      <main class="stage">
+        <section class="hero-metric">
+          <div class="num" id="livestock-num">0</div>
+          <span class="unit">
+            tonnes CO₂e from livestock so far this year — about 14.5% of all human greenhouse gases, running in real time
+          </span>
+          <div class="pills">
+            <div class="pill">
+              <b id="animals-num">0</b>
+              <span>land animals this year</span>
+            </div>
+            <div class="pill">
+              <b id="cattle-num">0</b>
+              <span>cattle this year</span>
+            </div>
+            <div class="pill">
+              <b id="forest-num">0</b>
+              <span>ha tropical primary forest lost (pace)</span>
+            </div>
+          </div>
+          <p class="session" id="session"></p>
+          <p class="session" id="translate"></p>
+        </section>
+      </main>
+
+      <section class="drawer">
+        <div class="modes" id="modes">
+          <button type="button" data-mode="current" aria-pressed="true">Now</button>
+          <button type="button" data-mode="nobeef" aria-pressed="false">No beef</button>
+          <button type="button" data-mode="vegetarian" aria-pressed="false">Vegetarian</button>
+          <button type="button" data-mode="vegan" aria-pressed="false">Vegan</button>
+        </div>
+        <div class="compare">
+          <div class="card now">
+            <em>You now</em>
+            <strong id="you-now">0 t</strong>
+            <small id="you-now-note">your year, current plate</small>
+          </div>
+          <div class="card">
+            <em>This choice</em>
+            <strong id="you-alt">0 t</strong>
+            <small id="you-alt-note">same as now</small>
+          </div>
+          <div class="card good">
+            <em>Saved</em>
+            <strong id="you-save">0 t</strong>
+            <small id="you-save-note">vs driving</small>
+          </div>
+        </div>
+        <div class="sliders" id="sliders"></div>
+        <p class="fineprint">
+          Counters divide the latest annual scientific totals across the real seconds of this year.
+          They are not live barn sensors. The globe uses this moment’s sun. Hotspots mark cattle and
+          forest-loss frontiers — not every red pulse is a burger, but pasture expansion is a major
+          driver in those regions.
+        </p>
+      </section>
+    </div>
+
+    <div class="sources" id="sources">
+      <article>
+        <h2>How the numbers work</h2>
+        <ol id="source-list"></ol>
+        <button class="ghost" id="close-sources" type="button">Close</button>
+      </article>
+    </div>
+
+    <div class="share-card" id="share">
+      <article>
+        <h2>Your number</h2>
+        <p id="share-text"></p>
+        <p id="copied" hidden>Copied to clipboard.</p>
+        <button class="ghost" id="close-share" type="button">Close</button>
+      </article>
+    </div>
+
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
