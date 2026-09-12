@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import { HOTSPOTS } from "./data.js";
 
 const DAY_MAP =
   "https://cdn.jsdelivr.net/npm/three-globe@2.44.1/example/img/earth-blue-marble.jpg";
@@ -70,6 +69,51 @@ function latLonToVector(lat, lon, radius) {
     radius * Math.cos(phi),
     radius * Math.sin(phi) * Math.sin(theta)
   );
+}
+
+function dotTexture(rgb) {
+  const c = document.createElement("canvas");
+  c.width = c.height = 64;
+  const g = c.getContext("2d");
+  const grd = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+  grd.addColorStop(0, `rgba(${rgb},1)`);
+  grd.addColorStop(0.35, `rgba(${rgb},0.7)`);
+  grd.addColorStop(1, `rgba(${rgb},0)`);
+  g.fillStyle = grd;
+  g.fillRect(0, 0, 64, 64);
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
+async function addLivestockDots(parent, radius) {
+  const res = await fetch("./data/livestock-points.json");
+  const payload = await res.json();
+  const groups = { cattle: [], pig: [] };
+  for (const p of payload.points || []) {
+    if (!groups[p.kind]) continue;
+    const v = latLonToVector(p.lat, p.lon, radius * 1.012);
+    groups[p.kind].push(v.x, v.y, v.z);
+  }
+  const layers = [
+    { key: "cattle", rgb: "255,45,26", size: 0.026 },
+    { key: "pig", rgb: "255,122,24", size: 0.022 },
+  ];
+  for (const layer of layers) {
+    const arr = groups[layer.key];
+    if (!arr.length) continue;
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.Float32BufferAttribute(arr, 3));
+    const mat = new THREE.PointsMaterial({
+      map: dotTexture(layer.rgb),
+      size: layer.size,
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+      sizeAttenuation: true,
+    });
+    parent.add(new THREE.Points(geo, mat));
+  }
 }
 
 function loadTexture(url) {
@@ -154,14 +198,10 @@ export async function createGlobe(canvas, { reducedMotion = false } = {}) {
   const sunLight = new THREE.DirectionalLight(0xffffff, 1.15);
   scene.add(sunLight);
 
-  for (const spot of HOTSPOTS) {
-    const pos = latLonToVector(spot.lat, spot.lon, radius * 1.01);
-    const dot = new THREE.Mesh(
-      new THREE.SphereGeometry(0.01, 12, 12),
-      new THREE.MeshBasicMaterial({ color: 0xffffff })
-    );
-    dot.position.copy(pos);
-    yaw.add(dot);
+  try {
+    await addLivestockDots(yaw, radius);
+  } catch (err) {
+    console.error(err);
   }
 
   function resize() {

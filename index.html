@@ -23,6 +23,7 @@
         <a href="#watch">Watch</a>
         <a href="#plate">Your plate</a>
         <a href="#help">Help</a>
+        <a href="#ideas">Ideas</a>
       </div>
     </nav>
 
@@ -31,7 +32,11 @@
       <div class="hero-copy reveal">
         <p class="eyebrow">A live clock of the food system</p>
         <h1>What we eat<br />is changing<br />the planet.</h1>
-        <p class="hint">Drag the Earth. Up, down, around. Then scroll.</p>
+        <p class="hint">Drag the Earth. Red is cattle. Amber is pigs.</p>
+        <div class="legend">
+          <span><i class="cattle"></i> Cattle farms & slaughter regions</span>
+          <span><i class="pig"></i> Pig farms & slaughter regions</span>
+        </div>
       </div>
     </section>
 
@@ -42,6 +47,9 @@
       <p class="lede reveal">
         That is about 14.5% of everything humans emit — more than every car
         and plane combined — running from FAO yearly rates, second by second.
+        The red and amber lights on the globe are real cattle and pig farming
+        regions: Climate TRACE facilities plus FAO herd belts. Not one animal
+        per dot. There are too many animals for that.
       </p>
     </section>
 
@@ -64,7 +72,7 @@
     <figure class="bleed reveal">
       <img id="img-amazon" alt="Satellite view of forest loss in Rondônia, Brazil" />
       <figcaption>
-        Rondônia, Brazil. NASA. Cattle pasture is a leading reason tropical forest is cut.
+        Amazon forest. Cattle pasture is a leading reason tropical forest is cut.
       </figcaption>
     </figure>
 
@@ -118,6 +126,36 @@
       <h2 class="reveal">These groups are already in the fight.</h2>
       <p class="lede reveal">Each card opens their site. Donate, join, or read. New tab.</p>
       <div class="ngos" id="ngos"></div>
+    </section>
+
+    <section class="chapter" id="ideas">
+      <p class="eyebrow reveal">Your turn</p>
+      <h2 class="reveal">Leave an idea or a thought.</h2>
+      <p class="lede reveal">
+        What should this clock show next? What changed your mind? Write it here.
+      </p>
+      <form class="idea-form reveal" id="idea-form">
+        <label>
+          Name
+          <input id="idea-name" name="name" maxlength="40" placeholder="Name or initials" autocomplete="name" />
+        </label>
+        <fieldset>
+          <legend>This is</legend>
+          <label><input type="radio" name="kind" value="idea" checked /> an idea</label>
+          <label><input type="radio" name="kind" value="thought" /> a thought</label>
+          <label><input type="radio" name="kind" value="question" /> a question</label>
+        </fieldset>
+        <label>
+          Message
+          <textarea id="idea-text" name="message" required maxlength="400" rows="5" placeholder="Tell us what you noticed, or what you want built next."></textarea>
+        </label>
+        <div class="form-row">
+          <span id="idea-count">0 / 400</span>
+          <button type="submit">Add to the wall</button>
+        </div>
+        <p class="form-status" id="idea-status" hidden></p>
+      </form>
+      <div class="idea-wall" id="idea-wall"></div>
     </section>
 
     <footer id="sources">

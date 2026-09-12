@@ -119,6 +119,107 @@ function renderPersonal() {
     `Going vegan from this plate saves ${saved.toFixed(1)} tonnes a year — about ${formatInt(drivingKm(saved))} km of driving.`;
 }
 
+const IDEA_KEY = "plate-clock-ideas";
+const SEED_IDEAS = [
+  {
+    name: "A visitor",
+    kind: "thought",
+    message: "I thought recycling was the big climate move. Dinner was hiding in plain sight.",
+    at: Date.now() - 86400000,
+  },
+  {
+    name: "Campus kitchen",
+    kind: "idea",
+    message: "Put these numbers next to the beef and bean burgers in the dining hall.",
+    at: Date.now() - 3600000,
+  },
+];
+
+function loadIdeas() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(IDEA_KEY) || "[]");
+    if (Array.isArray(saved) && saved.length) return saved;
+  } catch {
+    /* ignore */
+  }
+  return [...SEED_IDEAS];
+}
+
+function saveIdeas(ideas) {
+  localStorage.setItem(IDEA_KEY, JSON.stringify(ideas.slice(0, 40)));
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (ch) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+  })[ch]);
+}
+
+function renderIdeas() {
+  const wall = $("idea-wall");
+  const ideas = loadIdeas().slice().sort((a, b) => b.at - a.at);
+  wall.innerHTML = ideas
+    .map(
+      (idea) => `
+      <article class="idea-card">
+        <em>${escapeHtml(idea.kind)} · ${escapeHtml(idea.name || "Anonymous")}</em>
+        <p>${escapeHtml(idea.message)}</p>
+      </article>`
+    )
+    .join("");
+}
+
+function wireForm() {
+  const form = $("idea-form");
+  const text = $("idea-text");
+  const count = $("idea-count");
+  const status = $("idea-status");
+  text.addEventListener("input", () => {
+    count.textContent = `${text.value.length} / 400`;
+  });
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const message = text.value.trim();
+    if (message.length < 8) {
+      status.hidden = false;
+      status.textContent = "Give it a little more — at least a sentence.";
+      return;
+    }
+    const ideas = loadIdeas();
+    ideas.push({
+      name: $("idea-name").value.trim() || "Anonymous",
+      kind: form.kind.value,
+      message,
+      at: Date.now(),
+    });
+    saveIdeas(ideas);
+    form.reset();
+    count.textContent = "0 / 400";
+    status.hidden = false;
+    status.textContent = "On the wall. Thank you.";
+    renderIdeas();
+  });
+}
+
+function guardImages() {
+  document.querySelectorAll("img").forEach((img) => {
+    img.addEventListener(
+      "error",
+      () => {
+        if (!img.dataset.fallback) {
+          img.dataset.fallback = "1";
+          img.src = "./images/forest.jpg";
+        }
+      },
+      { once: true }
+    );
+  });
+}
+
 function wireShare() {
   $("share-btn").addEventListener("click", async () => {
     const now = dietFootprint(state.perWeek, "current");
@@ -153,9 +254,12 @@ function loop() {
 
 async function main() {
   renderMedia();
+  guardImages();
   renderSliders();
   renderPersonal();
   wireShare();
+  renderIdeas();
+  wireForm();
   reveal();
   loop();
 

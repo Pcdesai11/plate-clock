@@ -97,10 +97,10 @@ export const HOTSPOTS = [
 
 export const MEDIA = {
   images: {
-    amazon: "https://eoimages.gsfc.nasa.gov/images/imagerecords/90000/90671/rondonia_oli_201578.jpg",
-    forest: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=80",
-    food: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=2000&q=80",
-    cattle: "https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=2000&q=80",
+    amazon: "./images/amazon.jpg",
+    forest: "./images/forest.jpg",
+    food: "./images/food.jpg",
+    cattle: "./images/cattle.jpg",
   },
   videos: [
     {
@@ -121,73 +121,73 @@ export const NGOS = [
     name: "Mighty Earth",
     blurb: "Tracks cattle and soy that drive tropical deforestation.",
     href: "https://www.mightyearth.org/",
-    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1400&q=80",
+    image: "./images/ngo-forest.jpg",
   },
   {
     name: "Global Forest Watch",
     blurb: "See forest loss as it is detected from satellites.",
     href: "https://www.globalforestwatch.org/",
-    image: "https://eoimages.gsfc.nasa.gov/images/imagerecords/90000/90671/rondonia_oli_201578.jpg",
+    image: "./images/ngo-jungle.jpg",
   },
   {
     name: "World Resources Institute",
     blurb: "Food, land, and climate research you can act on.",
     href: "https://www.wri.org/food",
-    image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1400&q=80",
+    image: "./images/ngo-fields.jpg",
   },
   {
     name: "Rainforest Action Network",
     blurb: "Campaigns to keep forests standing and agribusiness accountable.",
     href: "https://www.ran.org/",
-    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1400&q=80",
+    image: "./images/ngo-woods.jpg",
   },
   {
     name: "WWF",
     blurb: "Wildlife and the lands that feed both people and livestock.",
     href: "https://www.worldwildlife.org/initiatives/food",
-    image: "https://images.unsplash.com/photo-1474511320723-9a56873867b5?auto=format&fit=crop&w=1400&q=80",
+    image: "./images/ngo-wildlife.jpg",
   },
   {
     name: "Amazon Conservation",
     blurb: "Protects Amazon habitat on the ground, not only in reports.",
     href: "https://www.amazonconservation.org/",
-    image: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1400&q=80",
+    image: "./images/amazon.jpg",
   },
   {
     name: "ProVeg International",
     blurb: "Helps people and institutions shift to plant-based food.",
     href: "https://proveg.com/",
-    image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1400&q=80",
+    image: "./images/ngo-produce.jpg",
   },
   {
     name: "Plant Based Treaty",
     blurb: "A global call to treat food as climate policy.",
     href: "https://plantbasedtreaty.org/",
-    image: "https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land_ocean_ice_cloud_2048.jpg",
+    image: "./images/earth-nasa.jpg",
   },
   {
     name: "The Humane League",
     blurb: "Animal protection with a clear path to change what is served.",
     href: "https://thehumaneleague.org/",
-    image: "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=1400&q=80",
+    image: "./images/ngo-hens.jpg",
   },
   {
     name: "Mercy For Animals",
     blurb: "Investigates factory farms and funds plant-based alternatives.",
     href: "https://mercyforanimals.org/",
-    image: "https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1400&q=80",
+    image: "./images/ngo-herd.jpg",
   },
   {
     name: "Greenpeace",
     blurb: "Forests, oceans, and the industries that put them at risk.",
     href: "https://www.greenpeace.org/international/act/",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80",
+    image: "./images/ngo-ocean.jpg",
   },
   {
     name: "Our World in Data",
     blurb: "The food-climate numbers, charted and sourced.",
     href: "https://ourworldindata.org/environmental-impacts-of-food",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1400&q=80",
+    image: "./images/ngo-earth.jpg",
   },
 ];
 
@@ -231,6 +231,11 @@ export const SOURCES = [
     claim: "Driving 0.251 kg CO₂e / km",
     source: "U.S. EPA average passenger vehicle",
     href: "https://www.epa.gov/greenvehicles/greenhouse-gas-emissions-typical-passenger-vehicle",
+  },
+  {
+    claim: "Red globe dots: Climate TRACE cattle sources + FAO-weighted cattle and pig farm belts",
+    source: "Climate TRACE agriculture inventory / FAOSTAT livestock stocks",
+    href: "https://climatetrace.org/data",
   },
 ];
 
