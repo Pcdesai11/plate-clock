@@ -116,19 +116,19 @@ async function addLivestockDots(parent, radius) {
   const layers = [
     {
       key: "cattle",
-      rgb: "120,28,18",
-      hazeRgb: "90,22,14",
+      rgb: "255,28,18",
+      hazeRgb: "255,40,20",
       size: 0.018,
       hazeSize: 0.042,
-      opacity: 0.72,
+      opacity: 0.92,
     },
     {
       key: "pig",
-      rgb: "140,72,28",
-      hazeRgb: "110,55,22",
+      rgb: "255,120,24",
+      hazeRgb: "255,100,20",
       size: 0.014,
       hazeSize: 0.034,
-      opacity: 0.65,
+      opacity: 0.85,
     },
   ];
 
@@ -159,7 +159,7 @@ async function addLivestockDots(parent, radius) {
         map: makeMarkTexture(layer.hazeRgb, 0.22),
         size: layer.hazeSize,
         transparent: true,
-        opacity: 0.35,
+        opacity: 0.5,
         depthWrite: false,
         sizeAttenuation: true,
         blending: THREE.NormalBlending,

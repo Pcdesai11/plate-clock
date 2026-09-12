@@ -166,8 +166,8 @@ h1 {
   margin-right: 6px;
 }
 
-.legend .cattle { background: #782012; box-shadow: 0 0 8px rgba(120, 28, 18, 0.45); }
-.legend .pig { background: #8c4820; box-shadow: 0 0 8px rgba(140, 72, 28, 0.4); }
+.legend .cattle { background: #ff1c12; box-shadow: 0 0 10px rgba(255, 28, 18, 0.75); }
+.legend .pig { background: #ff7818; box-shadow: 0 0 10px rgba(255, 120, 24, 0.55); }
 
 .chapter {
   max-width: 920px;
