@@ -60,10 +60,11 @@ function renderRecipes() {
           </div>
           <div class="recipe-body">
             <header>
-            <p class="eyebrow">${recipe.diet === "vegan" ? "Vegan" : "Vegetarian"} · ${recipe.time} · ${recipe.servings} servings${hits ? ` · ${hits} match${hits === 1 ? "" : "es"}` : ""}</p>
+            <p class="eyebrow">${recipe.diet === "vegan" ? "Vegan" : "Vegetarian"} · ${recipe.time} · ${recipe.servings} servings · ~${recipe.calories} kcal${hits ? ` · ${hits} match${hits === 1 ? "" : "es"}` : ""}</p>
             <h2>${recipe.title}</h2>
           </header>
           ${used.length ? `<p class="used">Using ${used.map(titleCase).join(", ")}</p>` : ""}
+          <p class="recipe-cals"><span class="num-good">~${recipe.calories} kcal</span> per serving · estimate</p>
           <h3>Ingredients</h3>
             <ul>${recipe.pantry.map((item) => `<li>${item}</li>`).join("")}</ul>
             <h3>Method</h3>
