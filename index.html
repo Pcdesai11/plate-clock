@@ -22,6 +22,7 @@
         <a href="#numbers">Numbers</a>
         <a href="#watch">Watch</a>
         <a href="#damage">Damage</a>
+        <a href="#countries">Countries</a>
         <a href="#plate">Your plate</a>
         <a href="./recipes.html">Recipes</a>
         <a href="#help">Help</a>
@@ -118,6 +119,43 @@
         <input id="impact-range" class="range" type="range" min="0" max="100" value="20" />
       </label>
       <p class="lede reveal" id="impact-copy"></p>
+    </section>
+
+    <section class="chapter countries" id="countries">
+      <p class="eyebrow reveal">Every country</p>
+      <h2 class="reveal">Who eats the most animals.</h2>
+      <p class="lede reveal">
+        Meat supply per person, every year. Search your country. Sort the list.
+        The redder the bar, the heavier the plate.
+      </p>
+      <div class="country-spot reveal" id="country-spot"></div>
+      <div class="country-tools reveal">
+        <input
+          id="country-search"
+          type="search"
+          placeholder="Find a country…"
+          autocomplete="off"
+        />
+        <div class="country-sorts" id="country-sorts">
+          <button type="button" data-sort="high" aria-pressed="true">Highest</button>
+          <button type="button" data-sort="low" aria-pressed="false">Lowest</button>
+          <button type="button" data-sort="name" aria-pressed="false">A–Z</button>
+        </div>
+      </div>
+      <p class="country-meta reveal" id="country-meta"></p>
+      <div class="country-table-wrap reveal">
+        <table class="country-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Country</th>
+              <th>Meat</th>
+              <th>Scale</th>
+            </tr>
+          </thead>
+          <tbody id="country-body"></tbody>
+        </table>
+      </div>
     </section>
 
     <section class="chapter" id="watch">

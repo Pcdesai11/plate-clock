@@ -317,6 +317,11 @@ export const SOURCES = [
     source: "Mekonnen & Hoekstra, Water Footprint Network",
     href: "https://www.waterfootprint.org/resources/interactive-tools/product-gallery/",
   },
+  {
+    claim: "Meat supply per person by country (kg/year)",
+    source: "FAO via Our World in Data",
+    href: "https://ourworldindata.org/grapher/meat-supply-per-person",
+  },
 ];
 
 export function msThisYear(now = Date.now()) {

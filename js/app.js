@@ -11,6 +11,7 @@ import {
   formatInt,
 } from "./data.js";
 import { createGlobe } from "./globe.js";
+import { initCountryTable } from "./countries.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -350,6 +351,7 @@ async function main() {
   wireForm();
   reveal();
   loop();
+  initCountryTable().then(() => reveal());
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   try {

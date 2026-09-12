@@ -808,6 +808,203 @@ footer a { color: var(--ink); }
 
 .why { color: var(--muted); font-size: 15px; }
 
+.country-spot {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.country-spot > div {
+  padding: 18px 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #0d0d0f;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.country-spot > div:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.country-spot em {
+  display: block;
+  font-style: normal;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.country-spot strong {
+  display: block;
+  margin-top: 8px;
+  font-size: clamp(18px, 3vw, 26px);
+  letter-spacing: -0.03em;
+}
+
+.country-spot span {
+  display: block;
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+.country-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 32px;
+}
+
+.country-tools input {
+  flex: 1;
+  min-width: 200px;
+  border: 1px solid var(--line);
+  background: #0d0d0f;
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 12px 18px;
+  font: 16px var(--sans);
+}
+
+.country-tools input:focus {
+  outline: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.country-sorts {
+  display: flex;
+  gap: 8px;
+}
+
+.country-sorts button {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 9px 14px;
+  font: 600 13px var(--sans);
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.country-sorts button:hover { transform: translateY(-2px); }
+
+.country-sorts button[aria-pressed="true"] {
+  background: var(--ink);
+  color: #000;
+}
+
+.country-meta {
+  margin: 16px 0 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.country-table-wrap {
+  max-height: min(70vh, 720px);
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: #0a0a0c;
+}
+
+.country-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.country-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #141418;
+  text-align: left;
+  padding: 14px 16px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+}
+
+.country-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  vertical-align: middle;
+}
+
+.country-table tbody tr:hover {
+  background: rgba(255, 59, 48, 0.08);
+}
+
+.country-table .rank {
+  width: 52px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.nation strong {
+  display: block;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+}
+
+.nation span {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.kg { white-space: nowrap; }
+
+.kg b {
+  display: block;
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.kg em {
+  display: block;
+  margin-top: 4px;
+  font-style: normal;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.bar-cell { min-width: 160px; }
+
+.meat-bar {
+  height: 10px;
+  border-radius: 99px;
+  background: #1c1c1e;
+  overflow: hidden;
+}
+
+.meat-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.vs {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.lvl-high .nation strong { color: #ff6b61; }
+.lvl-best .nation strong { color: var(--good); }
+
 @keyframes rise {
   from { opacity: 0; transform: translateY(18px); }
   to { opacity: 1; transform: none; }
@@ -823,7 +1020,8 @@ footer a { color: var(--ink); }
   nav { padding: 14px 16px; }
   .nav-links { gap: 12px; max-width: 70%; }
   .hero-copy, .chapter, .bleed figcaption, footer, .recipe-list { padding-left: 16px; padding-right: 16px; }
-  .split, .futures, .sliders, .ngos, .impact-stage, .recipe-card { grid-template-columns: 1fr; }
+  .split, .futures, .sliders, .ngos, .impact-stage, .recipe-card, .country-spot { grid-template-columns: 1fr; }
+  .country-table .bar-cell { min-width: 120px; }
   .idea-form fieldset { grid-template-columns: 1fr; }
   .lede { font-size: 18px; }
   .recipe-media { min-height: 180px; }
