@@ -38,6 +38,7 @@ export const RECIPES = [
     title: "Chickpea coconut curry",
     time: "30 min",
     servings: "3",
+    image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=1400&q=80",
     ingredients: ["chickpeas", "coconut milk", "tomato", "garlic", "ginger", "chili", "onion", "rice"],
     pantry: ["1 can chickpeas", "1 can coconut milk", "2 tomatoes or 1 cup crushed", "3 garlic cloves", "1 onion", "thumb of ginger", "chili to taste", "rice"],
     steps: [
@@ -55,6 +56,7 @@ export const RECIPES = [
     title: "Lentil ragu",
     time: "35 min",
     servings: "4",
+    image: "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=1400&q=80",
     ingredients: ["lentils", "tomato", "garlic", "onion", "pasta"],
     pantry: ["1 cup dry brown lentils", "1 onion", "3 garlic cloves", "2 cups tomato", "pasta", "olive oil", "salt"],
     steps: [
@@ -72,6 +74,7 @@ export const RECIPES = [
     title: "Garlic ginger tofu",
     time: "20 min",
     servings: "2",
+    image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1400&q=80",
     ingredients: ["tofu", "broccoli", "garlic", "ginger", "rice"],
     pantry: ["1 block firm tofu", "1 head broccoli", "3 garlic cloves", "ginger", "soy sauce", "rice"],
     steps: [
@@ -88,6 +91,7 @@ export const RECIPES = [
     title: "Black bean tacos",
     time: "20 min",
     servings: "3",
+    image: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=1400&q=80",
     ingredients: ["black beans", "tomato", "avocado", "chili", "corn", "onion"],
     pantry: ["1 can black beans", "1 tomato", "1 avocado", "chili", "corn tortillas or corn", "onion"],
     steps: [
@@ -104,6 +108,7 @@ export const RECIPES = [
     title: "Mushroom garlic rice",
     time: "28 min",
     servings: "3",
+    image: "https://images.unsplash.com/photo-1476124369491-e7addf5db371?auto=format&fit=crop&w=1400&q=80",
     ingredients: ["mushrooms", "garlic", "onion", "rice"],
     pantry: ["400g mushrooms", "1 onion", "4 garlic cloves", "1 cup rice", "oil", "salt"],
     steps: [
@@ -120,6 +125,7 @@ export const RECIPES = [
     title: "Peanut tofu bowl",
     time: "25 min",
     servings: "2",
+    image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1400&q=80",
     ingredients: ["tofu", "peanut", "rice", "spinach", "garlic"],
     pantry: ["tofu", "2 tbsp peanut butter", "rice", "a pile of spinach", "garlic", "soy sauce"],
     steps: [
@@ -136,6 +142,7 @@ export const RECIPES = [
     title: "Tomato chili eggs",
     time: "25 min",
     servings: "2",
+    image: "https://images.unsplash.com/photo-1590412200988-a436970781fa?auto=format&fit=crop&w=1400&q=80",
     ingredients: ["eggs", "tomato", "chili", "garlic", "onion"],
     pantry: ["4 eggs", "4 tomatoes or 1 can", "1 onion", "3 garlic cloves", "chili", "oil"],
     steps: [
@@ -152,6 +159,7 @@ export const RECIPES = [
     title: "Spinach tomato tofu",
     time: "30 min",
     servings: "3",
+    image: "https://images.unsplash.com/photo-1600335895229-6e75511892c8?auto=format&fit=crop&w=1400&q=80",
     ingredients: ["spinach", "tofu", "tomato", "garlic", "onion", "ginger"],
     pantry: ["1 block tofu", "a lot of spinach", "tomato", "onion", "garlic", "ginger"],
     steps: [
@@ -168,6 +176,7 @@ export const RECIPES = [
     title: "Sweet potato chili",
     time: "40 min",
     servings: "4",
+    image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=1400&q=80",
     ingredients: ["sweet potato", "black beans", "tomato", "chili", "onion", "garlic"],
     pantry: ["2 sweet potatoes", "1 can black beans", "tomato", "onion", "garlic", "chili"],
     steps: [
@@ -184,6 +193,7 @@ export const RECIPES = [
     title: "Eggplant tomato bake",
     time: "45 min",
     servings: "3",
+    image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=1400&q=80",
     ingredients: ["eggplant", "tomato", "garlic", "onion"],
     pantry: ["2 eggplants", "tomato sauce", "garlic", "onion", "oil", "salt"],
     steps: [
@@ -199,6 +209,7 @@ export const RECIPES = [
     title: "Lemon zucchini pasta",
     time: "18 min",
     servings: "2",
+    image: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1400&q=80",
     ingredients: ["pasta", "zucchini", "lemon", "garlic"],
     pantry: ["pasta", "2 zucchini", "1 lemon", "3 garlic cloves", "olive oil"],
     steps: [
@@ -215,6 +226,7 @@ export const RECIPES = [
     title: "Berry banana oats",
     time: "8 min",
     servings: "1",
+    image: "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?auto=format&fit=crop&w=1400&q=80",
     ingredients: ["oats", "banana", "berries"],
     pantry: ["1/2 cup oats", "1 banana", "a handful of berries", "water or plant milk"],
     steps: [
@@ -230,6 +242,7 @@ export const RECIPES = [
     title: "Yogurt berry bowl",
     time: "5 min",
     servings: "1",
+    image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=1400&q=80",
     ingredients: ["yogurt", "berries", "banana", "oats"],
     pantry: ["yogurt", "berries", "banana", "a spoon of oats"],
     steps: [
@@ -245,6 +258,7 @@ export const RECIPES = [
     title: "Tempeh kale skillet",
     time: "22 min",
     servings: "2",
+    image: "https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?auto=format&fit=crop&w=1400&q=80",
     ingredients: ["tempeh", "kale", "garlic", "lemon"],
     pantry: ["1 pack tempeh", "kale", "garlic", "lemon", "soy sauce"],
     steps: [
@@ -260,6 +274,7 @@ export const RECIPES = [
     title: "Corn avocado plate",
     time: "12 min",
     servings: "2",
+    image: "https://images.unsplash.com/photo-1520072959219-c595dc870360?auto=format&fit=crop&w=1400&q=80",
     ingredients: ["corn", "avocado", "lemon", "chili", "tomato"],
     pantry: ["2 cobs or 2 cups corn", "1 avocado", "lemon", "chili", "tomato"],
     steps: [
@@ -275,6 +290,7 @@ export const RECIPES = [
     title: "Roast potato lentils",
     time: "40 min",
     servings: "3",
+    image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=1400&q=80",
     ingredients: ["potato", "lentils", "garlic", "onion", "lemon"],
     pantry: ["4 potatoes", "1 cup lentils", "onion", "garlic", "lemon", "oil"],
     steps: [
@@ -283,5 +299,39 @@ export const RECIPES = [
       "Toss together. Lemon over the top.",
     ],
     why: "The roast you want on a cold night, built from the cheapest plants.",
+  },
+  {
+    id: "veg-frittata",
+    diet: "vegetarian",
+    title: "Spinach mushroom frittata",
+    time: "30 min",
+    servings: "3",
+    image: "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=1400&q=80",
+    ingredients: ["eggs", "spinach", "mushrooms", "onion", "garlic"],
+    pantry: ["6 eggs", "spinach", "mushrooms", "onion", "garlic", "oil", "salt"],
+    steps: [
+      "Sauté onion, garlic, and mushrooms.",
+      "Wilt spinach. Beat eggs with salt.",
+      "Pour eggs over the pan. Cook on low until almost set.",
+      "Finish under a broiler or with a lid.",
+    ],
+    why: "A meatless breakfast that still feels like weekend food.",
+  },
+  {
+    id: "buddha",
+    diet: "vegan",
+    title: "Broccoli chickpea bowl",
+    time: "25 min",
+    servings: "2",
+    image: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1400&q=80",
+    ingredients: ["broccoli", "chickpeas", "rice", "lemon", "garlic", "avocado"],
+    pantry: ["broccoli", "1 can chickpeas", "rice", "lemon", "garlic", "avocado", "olive oil"],
+    steps: [
+      "Cook rice. Roast or steam broccoli.",
+      "Warm chickpeas with garlic and oil.",
+      "Bowl: rice, broccoli, chickpeas, avocado.",
+      "Lemon over everything.",
+    ],
+    why: "Build dinner from plants you already bought. No recipe anxiety.",
   },
 ];

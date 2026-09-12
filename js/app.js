@@ -46,21 +46,10 @@ function paintRange(input, max) {
   const ceiling = Number(max ?? input.max) || 100;
   const pct = (Number(input.value) / ceiling) * 100;
   input.style.setProperty("--fill", `${pct}%`);
-  const fill = input.parentElement?.querySelector(".slider-fill");
-  if (fill) fill.style.width = `${pct}%`;
 }
 
 function paintAllRanges(root = document) {
   root.querySelectorAll("input.range").forEach((input) => paintRange(input));
-}
-
-function sliderShell(innerInputHtml, valueLabel = "") {
-  return `
-    ${valueLabel}
-    <div class="slider-shell">
-      <div class="slider-fill"></div>
-      ${innerInputHtml}
-    </div>`;
 }
 
 function renderMedia() {
@@ -111,13 +100,13 @@ function renderSliders() {
   for (const [id, food] of Object.entries(FOODS)) {
     const wrap = document.createElement("div");
     wrap.className = "slider";
-    wrap.innerHTML = sliderShell(
-      `<input class="range" type="range" min="0" max="14" step="1" value="${state.perWeek[id]}" data-food="${id}" aria-label="${food.label} servings per week" />`,
-      `<label>
+    wrap.innerHTML = `
+      <label>
         <span>${food.label}</span>
         <b data-val="${id}">${state.perWeek[id]}</b>
-      </label>`
-    );
+      </label>
+      <input class="range" type="range" min="0" max="14" step="1" value="${state.perWeek[id]}" data-food="${id}" aria-label="${food.label} servings per week" />
+    `;
     root.appendChild(wrap);
   }
   paintAllRanges(root);

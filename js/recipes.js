@@ -56,7 +56,7 @@ function renderRecipes() {
       return `
         <article class="recipe-card" style="animation-delay:${i * 55}ms">
           <div class="recipe-media">
-            <img src="${recipe.image}" alt="" loading="lazy" />
+            <img src="${recipe.image || "./images/food.jpg"}" alt="${recipe.title}" loading="lazy" />
           </div>
           <div class="recipe-body">
             <header>
