@@ -20,6 +20,10 @@ const state = {
   ),
   impactId: "climate",
   impactPct: 20,
+  harmShown: 0,
+  savedShown: 0,
+  harmTarget: 0,
+  savedTarget: 0,
 };
 
 function worldNow(now = Date.now()) {
@@ -34,6 +38,17 @@ function worldNow(now = Date.now()) {
 
 function drivingKm(tonnes) {
   return (tonnes * 1000) / COMPARATORS.kgCo2ePerKmDriving;
+}
+
+function paintRange(input, max) {
+  if (!input) return;
+  const ceiling = Number(max ?? input.max) || 100;
+  const pct = (Number(input.value) / ceiling) * 100;
+  input.style.setProperty("--fill", `${pct}%`);
+}
+
+function paintAllRanges(root = document) {
+  root.querySelectorAll("input.range").forEach((input) => paintRange(input));
 }
 
 function renderMedia() {
@@ -89,15 +104,21 @@ function renderSliders() {
         <span>${food.label}</span>
         <b data-val="${id}">${state.perWeek[id]}</b>
       </label>
-      <input type="range" min="0" max="14" step="1" value="${state.perWeek[id]}" data-food="${id}" />
+      <input class="range" type="range" min="0" max="14" step="1" value="${state.perWeek[id]}" data-food="${id}" />
     `;
     root.appendChild(wrap);
   }
+  paintAllRanges(root);
   root.addEventListener("input", (e) => {
     const input = e.target.closest("input[data-food]");
     if (!input) return;
     state.perWeek[input.dataset.food] = Number(input.value);
-    root.querySelector(`[data-val="${input.dataset.food}"]`).textContent = input.value;
+    const label = root.querySelector(`[data-val="${input.dataset.food}"]`);
+    label.textContent = input.value;
+    label.classList.remove("pop");
+    void label.offsetWidth;
+    label.classList.add("pop");
+    paintRange(input);
     renderPersonal();
   });
 }
@@ -141,8 +162,8 @@ function renderImpacts(now = Date.now()) {
   const total = impactValue(item, now);
   const prevented = total * (state.impactPct / 100) * item.avoidable;
   const remaining = Math.max(0, total - prevented);
-  $("impact-harm").textContent = formatImpact(item, remaining);
-  $("impact-saved").textContent = formatImpact(item, prevented);
+  state.harmTarget = remaining;
+  state.savedTarget = prevented;
   $("impact-harm-unit").textContent = item.unit;
   $("impact-saved-unit").textContent = item.unit;
   const share = total === 0 ? 0 : (remaining / total) * 100;
@@ -168,9 +189,11 @@ function wireImpacts() {
     renderImpacts();
   });
   const range = $("impact-range");
+  paintRange(range, 100);
   range.addEventListener("input", () => {
     state.impactPct = Number(range.value);
     $("impact-pct").textContent = `${state.impactPct}%`;
+    paintRange(range, 100);
     renderImpacts();
   });
 }
@@ -307,6 +330,11 @@ function loop() {
   const now = Date.now();
   renderWorld(now);
   renderImpacts(now);
+  const item = currentImpact();
+  state.harmShown += (state.harmTarget - state.harmShown) * 0.14;
+  state.savedShown += (state.savedTarget - state.savedShown) * 0.14;
+  $("impact-harm").textContent = formatImpact(item, state.harmShown);
+  $("impact-saved").textContent = formatImpact(item, state.savedShown);
   requestAnimationFrame(loop);
 }
 

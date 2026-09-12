@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipes — The Plate Clock</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body class="recipes-page">
+    <div id="loader"><p>Kitchen</p></div>
+
+    <nav>
+      <a class="logo" href="./index.html">Plate Clock</a>
+      <div class="nav-links">
+        <a href="./index.html#numbers">Numbers</a>
+        <a href="./index.html#damage">Damage</a>
+        <a href="./index.html#plate">Your plate</a>
+        <a href="./recipes.html" aria-current="page">Recipes</a>
+        <a href="./index.html#help">Help</a>
+        <a href="./index.html#ideas">Ideas</a>
+      </div>
+    </nav>
+
+    <header class="chapter recipe-hero">
+      <p class="eyebrow reveal in">Cook the better number</p>
+      <h1>Pick what you have.<br />Get a full plate.</h1>
+      <p class="lede">
+        Choose vegan or vegetarian. Tap the ingredients in your kitchen.
+        Every match is a whole recipe — ingredients, method, and why it matters.
+      </p>
+    </header>
+
+    <section class="chapter recipe-tools">
+      <div class="diet-picks" id="diet-picks">
+        <button type="button" data-diet="vegan" aria-pressed="true">Vegan</button>
+        <button type="button" data-diet="vegetarian" aria-pressed="false">Vegetarian</button>
+      </div>
+      <div class="tool-row">
+        <p class="eyebrow">Ingredients in your kitchen</p>
+        <button type="button" class="text-btn" id="clear-ings">Clear</button>
+      </div>
+      <div class="chips" id="chips"></div>
+    </section>
+
+    <p class="chapter" id="recipe-empty" hidden>Nothing uses that mix yet. Drop a chip or two.</p>
+    <div class="recipe-list" id="recipe-list"></div>
+
+    <footer>
+      <p><a href="./index.html">Back to the clock</a></p>
+    </footer>
+
+    <script type="module" src="./js/recipes.js"></script>
+  </body>
+</html>

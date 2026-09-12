@@ -71,18 +71,37 @@ function latLonToVector(lat, lon, radius) {
   );
 }
 
-function dotTexture(rgb) {
+function hash01(lat, lon, salt = 0) {
+  const n = Math.sin(lat * 12.9898 + lon * 78.233 + salt * 19.19) * 43758.5453;
+  return n - Math.floor(n);
+}
+
+/** Soft ground mark — looks like a satellite heat fleck, not a neon sticker. */
+function makeMarkTexture(rgb, soft = 0.55) {
+  const size = 128;
   const c = document.createElement("canvas");
-  c.width = c.height = 64;
+  c.width = c.height = size;
   const g = c.getContext("2d");
-  const grd = g.createRadialGradient(32, 32, 0, 32, 32, 32);
-  grd.addColorStop(0, `rgba(${rgb},1)`);
-  grd.addColorStop(0.35, `rgba(${rgb},0.7)`);
+  const mid = size / 2;
+  const grd = g.createRadialGradient(mid, mid, 0, mid, mid, mid);
+  grd.addColorStop(0, `rgba(${rgb},0.95)`);
+  grd.addColorStop(0.18, `rgba(${rgb},0.55)`);
+  grd.addColorStop(0.42, `rgba(${rgb},${soft})`);
   grd.addColorStop(1, `rgba(${rgb},0)`);
   g.fillStyle = grd;
-  g.fillRect(0, 0, 64, 64);
+  g.fillRect(0, 0, size, size);
+  // irregular edge so it does not read as a perfect UI circle
+  g.globalCompositeOperation = "destination-out";
+  for (let i = 0; i < 14; i++) {
+    const a = (i / 14) * Math.PI * 2;
+    const r = mid * (0.72 + (i % 3) * 0.08);
+    g.beginPath();
+    g.arc(mid + Math.cos(a) * r * 0.35, mid + Math.sin(a) * r * 0.35, mid * 0.18, 0, Math.PI * 2);
+    g.fill();
+  }
   const tex = new THREE.CanvasTexture(c);
   tex.colorSpace = THREE.SRGBColorSpace;
+  tex.needsUpdate = true;
   return tex;
 }
 
@@ -91,28 +110,78 @@ async function addLivestockDots(parent, radius) {
   const payload = await res.json();
   const groups = { cattle: [], pig: [] };
   for (const p of payload.points || []) {
-    if (!groups[p.kind]) continue;
-    const v = latLonToVector(p.lat, p.lon, radius * 1.012);
-    groups[p.kind].push(v.x, v.y, v.z);
+    if (groups[p.kind]) groups[p.kind].push(p);
   }
+
   const layers = [
-    { key: "cattle", rgb: "255,45,26", size: 0.026 },
-    { key: "pig", rgb: "255,122,24", size: 0.022 },
+    {
+      key: "cattle",
+      rgb: "120,28,18",
+      hazeRgb: "90,22,14",
+      size: 0.018,
+      hazeSize: 0.042,
+      opacity: 0.72,
+    },
+    {
+      key: "pig",
+      rgb: "140,72,28",
+      hazeRgb: "110,55,22",
+      size: 0.014,
+      hazeSize: 0.034,
+      opacity: 0.65,
+    },
   ];
+
   for (const layer of layers) {
-    const arr = groups[layer.key];
-    if (!arr.length) continue;
+    const pts = groups[layer.key];
+    if (!pts.length) continue;
+
+    const positions = new Float32Array(pts.length * 3);
+    const sizes = new Float32Array(pts.length);
+    for (let i = 0; i < pts.length; i++) {
+      const p = pts[i];
+      const t = hash01(p.lat, p.lon);
+      const jitterLat = p.lat + (hash01(p.lat, p.lon, 1) - 0.5) * 0.35;
+      const jitterLon = p.lon + (hash01(p.lat, p.lon, 2) - 0.5) * 0.35;
+      const v = latLonToVector(jitterLat, jitterLon, radius * (1.002 + t * 0.0015));
+      positions[i * 3] = v.x;
+      positions[i * 3 + 1] = v.y;
+      positions[i * 3 + 2] = v.z;
+      sizes[i] = 0.45 + t * 1.4;
+    }
+
+    // soft haze underlay — reads as a farm region, not a pin
+    const hazeGeo = new THREE.BufferGeometry();
+    hazeGeo.setAttribute("position", new THREE.BufferAttribute(positions.slice(0), 3));
+    const haze = new THREE.Points(
+      hazeGeo,
+      new THREE.PointsMaterial({
+        map: makeMarkTexture(layer.hazeRgb, 0.22),
+        size: layer.hazeSize,
+        transparent: true,
+        opacity: 0.35,
+        depthWrite: false,
+        sizeAttenuation: true,
+        blending: THREE.NormalBlending,
+      })
+    );
+    parent.add(haze);
+
     const geo = new THREE.BufferGeometry();
-    geo.setAttribute("position", new THREE.Float32BufferAttribute(arr, 3));
-    const mat = new THREE.PointsMaterial({
-      map: dotTexture(layer.rgb),
-      size: layer.size,
-      transparent: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-      sizeAttenuation: true,
-    });
-    parent.add(new THREE.Points(geo, mat));
+    geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    const marks = new THREE.Points(
+      geo,
+      new THREE.PointsMaterial({
+        map: makeMarkTexture(layer.rgb, 0.4),
+        size: layer.size,
+        transparent: true,
+        opacity: layer.opacity,
+        depthWrite: false,
+        sizeAttenuation: true,
+        blending: THREE.NormalBlending,
+      })
+    );
+    parent.add(marks);
   }
 }
 
