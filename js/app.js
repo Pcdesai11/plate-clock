@@ -46,10 +46,21 @@ function paintRange(input, max) {
   const ceiling = Number(max ?? input.max) || 100;
   const pct = (Number(input.value) / ceiling) * 100;
   input.style.setProperty("--fill", `${pct}%`);
+  const fill = input.parentElement?.querySelector(".slider-fill");
+  if (fill) fill.style.width = `${pct}%`;
 }
 
 function paintAllRanges(root = document) {
   root.querySelectorAll("input.range").forEach((input) => paintRange(input));
+}
+
+function sliderShell(innerInputHtml, valueLabel = "") {
+  return `
+    ${valueLabel}
+    <div class="slider-shell">
+      <div class="slider-fill"></div>
+      ${innerInputHtml}
+    </div>`;
 }
 
 function renderMedia() {
@@ -100,13 +111,13 @@ function renderSliders() {
   for (const [id, food] of Object.entries(FOODS)) {
     const wrap = document.createElement("div");
     wrap.className = "slider";
-    wrap.innerHTML = `
-      <label>
+    wrap.innerHTML = sliderShell(
+      `<input class="range" type="range" min="0" max="14" step="1" value="${state.perWeek[id]}" data-food="${id}" aria-label="${food.label} servings per week" />`,
+      `<label>
         <span>${food.label}</span>
         <b data-val="${id}">${state.perWeek[id]}</b>
-      </label>
-      <input class="range" type="range" min="0" max="14" step="1" value="${state.perWeek[id]}" data-food="${id}" />
-    `;
+      </label>`
+    );
     root.appendChild(wrap);
   }
   paintAllRanges(root);
@@ -246,7 +257,7 @@ function renderIdeas() {
     .map(
       (idea) => `
       <article class="idea-card">
-        <em>${escapeHtml(idea.kind)} · ${escapeHtml(idea.name || "Anonymous")}</em>
+        <em>${escapeHtml(idea.kind.charAt(0).toUpperCase() + idea.kind.slice(1))} · ${escapeHtml(idea.name || "Anonymous")}</em>
         <p>${escapeHtml(idea.message)}</p>
       </article>`
     )
@@ -266,7 +277,7 @@ function wireForm() {
     const message = text.value.trim();
     if (message.length < 8) {
       status.hidden = false;
-      status.textContent = "Give it a little more — at least a sentence.";
+      status.textContent = "Please write at least one full sentence.";
       return;
     }
     const ideas = loadIdeas();
@@ -280,7 +291,7 @@ function wireForm() {
     form.reset();
     count.textContent = "0 / 400";
     status.hidden = false;
-    status.textContent = "On the wall. Thank you.";
+    status.textContent = "Added to the wall. Thank you.";
     renderIdeas();
   });
 }
@@ -358,7 +369,7 @@ async function main() {
     await createGlobe($("globe"), { reducedMotion });
   } catch (err) {
     console.error(err);
-    $("loader-text").textContent = "Numbers still live";
+    $("loader-text").textContent = "Numbers are still live";
   }
   $("loader").classList.add("hide");
 }

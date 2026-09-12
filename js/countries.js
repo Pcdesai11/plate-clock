@@ -25,9 +25,9 @@ function intensity(kg, max) {
 
 function level(kg, median) {
   if (kg >= median * 1.4) return { label: "Very high", cls: "lvl-high" };
-  if (kg >= median) return { label: "High", cls: "lvl-mid" };
-  if (kg >= median * 0.5) return { label: "Lower", cls: "lvl-low" };
-  return { label: "Lowest", cls: "lvl-best" };
+  if (kg >= median) return { label: "Above median", cls: "lvl-mid" };
+  if (kg >= median * 0.5) return { label: "Below median", cls: "lvl-low" };
+  return { label: "Among the lowest", cls: "lvl-best" };
 }
 
 function filtered() {
@@ -56,7 +56,7 @@ function renderTable() {
   const rankOf = new Map(ranked.map((r, i) => [r.code, i + 1]));
 
   meta.textContent = rows.length
-    ? `${rows.length} countries · kg of meat per person per year · FAO / Our World in Data`
+    ? `${rows.length} countries · kilograms of meat per person per year · FAO / Our World in Data`
     : "No country matches that search.";
 
   body.innerHTML = rows
@@ -79,7 +79,7 @@ function renderTable() {
             <div class="meat-bar" aria-hidden="true">
               <i style="width:${pct}%; background:${intensity(r.kg, tableState.max)}"></i>
             </div>
-            <span class="vs">${vs}× median · ${lvl.label}</span>
+            <span class="vs">${vs}× the median · ${lvl.label}</span>
           </td>
         </tr>`;
     })

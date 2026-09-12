@@ -37,8 +37,8 @@
         <h1>What we eat<br />is changing<br />the planet.</h1>
         <p class="hint">Drag the Earth. Bright red is cattle. Orange is pigs.</p>
         <div class="legend">
-          <span><i class="cattle"></i> Cattle farm & slaughter regions</span>
-          <span><i class="pig"></i> Pig farm & slaughter regions</span>
+          <span><i class="cattle"></i> Cattle farms and slaughter regions</span>
+          <span><i class="pig"></i> Pig farms and slaughter regions</span>
         </div>
       </div>
     </section>
@@ -46,7 +46,7 @@
     <section class="chapter" id="numbers">
       <p class="eyebrow reveal">This year, so far</p>
       <p class="giant num-bad reveal" id="livestock-num">0</p>
-      <h2 class="reveal">tonnes of greenhouse gas from livestock.</h2>
+      <h2 class="reveal">Tonnes of greenhouse gas from livestock.</h2>
       <p class="lede reveal">
         That is about 14.5% of everything humans emit — more than every car
         and plane combined — running from FAO yearly rates, second by second.
@@ -82,7 +82,7 @@
     <section class="chapter">
       <p class="eyebrow reveal">Forest</p>
       <p class="giant sm num-bad reveal" id="forest-num">0</p>
-      <h2 class="reveal">hectares of tropical primary forest, at this year’s pace.</h2>
+      <h2 class="reveal">Hectares of tropical primary forest, at this year’s pace.</h2>
     </section>
 
     <figure class="bleed reveal">
@@ -116,7 +116,10 @@
       </div>
       <label class="impact-slider reveal">
         <span>People shifting to a plant plate: <b id="impact-pct">20%</b></span>
-        <input id="impact-range" class="range" type="range" min="0" max="100" value="20" />
+        <div class="slider-shell impact-shell">
+          <div class="slider-fill"></div>
+          <input id="impact-range" class="range" type="range" min="0" max="100" value="20" aria-label="Percent of people shifting to a plant plate" />
+        </div>
       </label>
       <p class="lede reveal" id="impact-copy"></p>
     </section>
@@ -195,7 +198,7 @@
     <section class="chapter help" id="help">
       <p class="eyebrow reveal">Do something with it</p>
       <h2 class="reveal">These groups are already in the fight.</h2>
-      <p class="lede reveal">Each card opens their site. Donate, join, or read. New tab.</p>
+      <p class="lede reveal">Each card opens their site. Donate, join, or read — opens in a new tab.</p>
       <div class="ngos" id="ngos"></div>
     </section>
 
@@ -212,9 +215,9 @@
         </label>
         <fieldset>
           <legend>This is</legend>
-          <label><input type="radio" name="kind" value="idea" checked /> an idea</label>
-          <label><input type="radio" name="kind" value="thought" /> a thought</label>
-          <label><input type="radio" name="kind" value="question" /> a question</label>
+          <label><input type="radio" name="kind" value="idea" checked /> An idea</label>
+          <label><input type="radio" name="kind" value="thought" /> A thought</label>
+          <label><input type="radio" name="kind" value="question" /> A question</label>
         </fieldset>
         <label>
           Message

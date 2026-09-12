@@ -21,13 +21,17 @@ function score(recipe) {
   return hits;
 }
 
+function titleCase(name) {
+  return name.replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
 function renderChips() {
   const root = $("chips");
   const hidden = state.diet === "vegan" ? new Set(["eggs", "yogurt"]) : new Set();
   root.innerHTML = INGREDIENTS.filter((name) => !hidden.has(name))
     .map((name) => {
       const on = state.picked.has(name);
-      return `<button type="button" class="chip" data-ing="${name}" aria-pressed="${on}">${name}</button>`;
+      return `<button type="button" class="chip" data-ing="${name}" aria-pressed="${on}">${titleCase(name)}</button>`;
     })
     .join("");
 }
@@ -56,11 +60,11 @@ function renderRecipes() {
           </div>
           <div class="recipe-body">
             <header>
-              <p class="eyebrow">${recipe.diet} · ${recipe.time} · ${recipe.servings} servings${hits ? ` · ${hits} match` : ""}</p>
-              <h2>${recipe.title}</h2>
-            </header>
-            ${used.length ? `<p class="used">Using ${used.join(", ")}</p>` : ""}
-            <h3>Ingredients</h3>
+            <p class="eyebrow">${recipe.diet === "vegan" ? "Vegan" : "Vegetarian"} · ${recipe.time} · ${recipe.servings} servings${hits ? ` · ${hits} match${hits === 1 ? "" : "es"}` : ""}</p>
+            <h2>${recipe.title}</h2>
+          </header>
+          ${used.length ? `<p class="used">Using ${used.map(titleCase).join(", ")}</p>` : ""}
+          <h3>Ingredients</h3>
             <ul>${recipe.pantry.map((item) => `<li>${item}</li>`).join("")}</ul>
             <h3>Method</h3>
             <ol>${recipe.steps.map((step) => `<li>${step}</li>`).join("")}</ol>
